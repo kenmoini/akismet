@@ -1,8 +1,3 @@
-Akismet
-=======
-
-Akismet API Composer Package for Laravel 4
-
 # Introduction
 
 This is a simple little PHP5 class that enables you use the Akismet anti-spam service in your Laravel 4 application.
@@ -24,13 +19,13 @@ Or check out the git repository:
 
 Or alternatively, download from Packagist:
 
-	(coming soon)
+	https://packagist.org/packages/kenmoini/akismet
 
 # Installation
 
 Once you have the package loaded into your application's file system, open the app/config/app.php file and add the following line to the 'providers' array:
 	
-		'Kenmoini\Akismet\AkismetServiceProvider',
+	'Kenmoini\Akismet\AkismetServiceProvider',
 
 Then, in that same file, add a new key such as the following:
 
@@ -40,10 +35,6 @@ Then, in that same file, add a new key such as the following:
 	'akismet_api_key' => 'YOUR_KEY_HERE',
 
 Don't have a key yet?  Goto the [Akismet site](https://akismet.com) and sign up for one.  It's free and takes a few moments of your time
-
-# Documentation
-
-Coming soon
 
 # Usage
 
@@ -56,9 +47,10 @@ Before you can use Akismet, you need an Akismet API key (they are free and getti
 		if ($akismet->isKeyValid()) { echo 'valid!'; } else { echo 'error!'; }
 	});
 
-And from there, load your browser to example.com/testAkismet (replacing example.com with your domain of course).  If you see "valid!" then everything's installed and configured correctly and from there you can go about following the next bit of info to spam check submitted data
+And from there, load your browser to **example.com/testAkismet** (replacing _example.com_ with your domain of course).  If you see **"valid!"** then everything's installed and configured correctly and from there you can go about following the next bit of info to spam check submitted data
 
-In an example application, one might have a simple Contact form with the inputs of Name, Email Address, Author URL, and Comment Body.  These inputs reassign to $name, $email, $url, and $comment, respectfully (after POST processing/sanitation/variable assigning/etc).  So let's submit that data to check for spammy-ness with Akismet:
+In an example application, one might have a simple Contact form with the inputs of *Name*, *Email Address*, *Author URL*, and *Comment Body*.  These inputs reassign to *$name*, *$email*, *$url*, and *$comment*, respectfully (after POST processing/sanitation/variable assigning/etc).
+So let's submit that data to check for spammy-ness with Akismet:
 
 	$apiKey = Config::get('app.akismet_api_key');
 	$siteURL = Config::get('app.url');
@@ -85,6 +77,10 @@ and
 to submit mis-diagnosed spam and ham, which improves the system for everybody.
 
 ## Changelog
+
+### Version 0.6
+
+* Cleaned up README.md.  I know, a big change.  Tests coming next update.
 
 ### Version 0.5
 
