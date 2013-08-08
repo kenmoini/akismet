@@ -8,7 +8,7 @@ Most of the ground work was done by Alex Potsides, [http://www.achingbrain.net](
 If you're using Laravel 4, you can skip the download proceedure and simply add the following line to your app's composer.json file in the require block
 
 	"require": {
-		"kenmoini/akismet": "0.*",
+		"kenmoini/akismet": "dev-master",
 	},
 and then run from your Laravel 4 application directory:
 	php composer.phar install
