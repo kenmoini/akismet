@@ -72,18 +72,28 @@ class Akismet {
 	private $requestFactory;
 
 	// This prevents some potentially sensitive information from being sent accross the wire.
-	private $ignore = array('HTTP_COOKIE',
-							'HTTP_X_FORWARDED_FOR',
-							'HTTP_X_FORWARDED_HOST',
-							'HTTP_MAX_FORWARDS',
-							'HTTP_X_FORWARDED_SERVER',
-							'REDIRECT_STATUS',
-							'SERVER_PORT',
-							'PATH',
-							'DOCUMENT_ROOT',
-							'SERVER_ADMIN',
-							'QUERY_STRING',
-							'PHP_SELF' );
+	// You may add more elements here, but they are often related to internal server
+	  // data that makes little sense to check whether a comment is spam or not.
+	  // Be sure to not send HTTP_COOKIE as it may compromise your user's privacy!
+	  private $safe_to_send = array(
+	    'CONTENT_LENGTH',
+	    'CONTENT_TYPE',
+	    'HTTP_ACCEPT',
+	    'HTTP_ACCEPT_CHARSET',
+	    'HTTP_ACCEPT_ENCODING',
+	    'HTTP_ACCEPT_LANGUAGE',
+	    'HTTP_REFERER',
+	    'HTTP_USER_AGENT',
+	    'REMOTE_ADDR',
+	    'REMOTE_PORT',
+	    'SCRIPT_URI',
+	    'SCRIPT_URL',
+	    'SERVER_ADDR',
+	    'SERVER_NAME',
+	    'REQUEST_METHOD',
+	    'REQUEST_URI',
+	    'SCRIPT_NAME'
+	  );
 
 	/**
 	 * @param	string	$blogURL			The URL of your blog.
@@ -157,7 +167,7 @@ class Akismet {
 	// Formats the data for transmission
 	private function getQueryString() {
 		foreach($_SERVER as $key => $value) {
-			if(!in_array($key, $this->ignore)) {
+			if(in_array($key, $this->safe_to_send)) {
 				if($key == 'REMOTE_ADDR') {
 					$this->comment[$key] = $this->comment['user_ip'];
 				} else {
